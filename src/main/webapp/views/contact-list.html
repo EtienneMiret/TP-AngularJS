@@ -1,0 +1,14 @@
+<p>Trier par&nbsp;:
+  <select ng-model="order">
+    <option value="lastName">nom de famille</option>
+    <option value="firstName">prénom</option>
+  </select>
+</p>
+
+<ol contacts-loading="loading">
+  <li ng-repeat="contact in contacts | orderBy:order">
+    <a href="#/{{contact.id}}">{{contact.firstName}} {{contact.lastName}}</a>
+  </li>
+</ol>
+
+<p>Créer un <a href="#/new">nouveau contact</a>.</p>

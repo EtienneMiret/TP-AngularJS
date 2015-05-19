@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <context:component-scan base-package="com.groupehn.institut.tpangularjs"/>
+
+  <mvc:annotation-driven>
+    <mvc:message-converters>
+      <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper" ref="jacksonObjectMapper"/>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
+
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+
+  <bean id="jacksonObjectMapper" class="com.groupehn.institut.tpangularjs.service.JacksonObjectMapper"/>
+
+  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="contactsEmf"/>
+  </bean>
+
+  <bean id="contactsEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" destroy-method="destroy">
+    <property name="dataSource" ref="hsqldb"/>
+    <property name="persistenceProviderClass" value="org.hibernate.jpa.HibernatePersistenceProvider"/>
+  </bean>
+
+  <bean id="hsqldb" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+    <property name="driver" ref="hsqldbDriver"/>
+    <property name="url" value="jdbc:hsqldb:file:C:\Users\Administrateur\Desktop\hsqldb\data\test"/>
+    <property name="username" value="SA"/>
+    <property name="password" value=""/>
+  </bean>
+
+  <bean id="hsqldbDriver" class="org.hsqldb.jdbcDriver"/>
+
+</beans>

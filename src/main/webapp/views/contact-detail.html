@@ -1,0 +1,16 @@
+<dl contacts-loading="loading">
+  <dt>Prénom</dt>
+  <dd>{{contact.firstName}}</dd>
+  <dt>Nom</dt>
+  <dd>{{contact.lastName}}</dd>
+  <dt ng-repeat-start="field in contact.fields | orderBy:'order'">{{field.type}}</dt>
+  <dd ng-repeat-end>{{field.value}}</dd>
+  <dt>Création</dt>
+  <dd>{{contact.creation | relativeTime:now}}</dd>
+  <dt>Modification</dt>
+  <dd>{{contact.modification | relativeTime:now}}</dd>
+</dl>
+
+<div><a href="#/{{contact.id}}/edit">Modifier</a> <input type="button" value="Supprimer" ng-click="remove();"></div>
+
+<div><a href="#/">Liste</a></div>

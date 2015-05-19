@@ -1,0 +1,12 @@
+<div contacts-loading="loading" id="contact">
+  <p><label>Prénom&nbsp;: <input ng-model="contact.firstName"></label></p>
+  <p><label>Nom&nbsp;: <input ng-model="contact.lastName"></label></p>
+  <p ng-repeat="field in contact.fields | orderBy:'order'" class="field"><input ng-model="field.type">&nbsp;: <input ng-model="field.value">
+    <input type="button" ng-click="removeField(field);" value="x"> <img src="img/vertical-move_cursor.png" class="handle" style="height: 1em;"></p>
+</div>
+
+<p><input type="button" ng-click="addField();" value="Ajouter un champ"></p>
+
+<p><input type="button" ng-click="save();" value="Enregistrer"></p>
+
+<p><a href="#/{{contact.id}}">Annuler</a></p>
