@@ -1,0 +1,7 @@
+# Generated files
+target
+
+# Eclipse’s configuration files
+.project
+.settings
+.classpath
